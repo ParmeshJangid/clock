@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: rgb(46, 38, 38);
+            font-family: Poppins;+
+        }
+
+        .container {
+            border: 20px double rgb(28, 21, 34);
+            height: 350px;
+            background: linear-gradient(#303347, #9198e5);
+            width: 500px;
+            border-radius: 20px;
+            margin: auto;
+            margin-top: 40px;
+            padding-top: 30px;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 50px;
+            color: white;
+            text-shadow: 0px 0px 10px rgb(116, 110, 192);
+        }
+
+        .container::before {
+            content: "";
+            background-size: cover;
+            background-repeat: no-repeat; 
+            transition: background-image 4s ease-in-out;
+            z-index: -1;
+        }
+
+        .showDate {
+            font-size: 25px;
+            text-shadow: 0px 0px 10px rgb(24, 23, 36);
+        }
+
+        .showDay {
+            font-size: 25px;
+            text-shadow: 0px 0px 10px rgb(24, 23, 36);
+        }
+
+        button {
+            display: inline;
+            margin-top: 30px;
+            border: none;
+            font-size: 20px;
+            background-color: lightslategrey;
+            padding: 7px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            box-shadow: 0px 0px 10px 5px black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="time"></div>
+        <span class="showDate"></span>
+        <span class="showDay"></span>
+    </div>
+    <center>
+        <button class="btn1" onclick="date()">Show Date</button>
+        <button class="btn2" onclick="changeBg()">Change Background</button>
+    </center>
+</body>
+<script>
+
+    setInterval(() => {
+        document.querySelector(".time").innerHTML = new Date().toLocaleTimeString()
+    }, 1000);
+    let data = true
+    const date = () => {
+        if (data) {
+            document.querySelector(".showDate").innerHTML = new Date().toLocaleDateString();
+            let day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+            let Day = new Date().getDay()
+            document.querySelector(".showDay").innerHTML = day[Day]
+            document.querySelector(".btn1").innerHTML = "Hide Date"
+            data = false;
+        } else {
+            document.querySelector(".showDay").innerHTML = ' '
+            document.querySelector(".showDate").innerHTML = " ";
+            document.querySelector(".btn1").innerHTML = "Show Date"
+            data = true
+        }
+    }
+    const changeBg = ()=>{
+        const images = [
+            "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCImJbr8suKoDCFIVMfDVNhoopXBdDFfIUzw&s')",
+            "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-dTrmvcmURtXxbfl8bk2QEeF6K_FkUeT-Ng&s')",
+            "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8E5yDKZiC3CNirlGkZXEyazhEUeVYd_Lbuw&s')",
+            "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8rQ8YEcpSwhCrYuwgg_94M6LwHAPGvtlNdQ&s')",
+            "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8r3aBP9UwmXIDMmjO35vDhqTRF7_U9ez9Uw&s')"
+        ]
+        document.querySelector(".container").style.backgroundImage= images[Math.floor(Math.random()*images.length)] 
+    }
+</script>
+
+</html>
